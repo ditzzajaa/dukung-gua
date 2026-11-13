@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dukung DitzzSolo Code</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #080b0a;
+    color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    padding: 25px 16px;
+}
+
+.container {
+    max-width: 480px;
+    margin: auto;
+}
+
+.hero {
+    text-align: center;
+    margin: 35px 0 28px;
+}
+
+.hero h1 {
+    font-size: 35px;
+    line-height: 1.2;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.green {
+    color: #19d879;
+}
+
+.description {
+    color: #a5aaa7;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.card {
+    background: #111715;
+    border: 1px solid #202c25;
+    border-radius: 17px;
+    padding: 20px;
+    margin-bottom: 17px;
+}
+
+.qris-box {
+    text-align: center;
+}
+
+.qris {
+    display: block;
+    width: 100%;
+    max-width: 290px;
+    margin: auto;
+    border-radius: 10px;
+    background: white;
+    padding: 8px;
+}
+
+.merchant {
+    margin-top: 17px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.merchant-info {
+    color: #929b95;
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+.fullscreen {
+    display: inline-block;
+    color: #20d982;
+    font-size: 13px;
+    margin-top: 17px;
+    cursor: pointer;
+    text-decoration: underline;
+    background: none;
+    border: none;
+}
+
+.section-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.amounts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.amount {
+    background: #19221d;
+    border: 1px solid #29382e;
+    border-radius: 12px;
+    padding: 15px 10px;
+    text-align: left;
+}
+
+.amount strong {
+    display: block;
+    color: #20d982;
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+
+.amount span {
+    color: #a6afa9;
+    font-size: 12px;
+}
+
+.support-list {
+    list-style: none;
+}
+
+.support-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid #26302a;
+    color: #d0d6d2;
+    font-size: 14px;
+}
+
+.support-list li:last-child {
+    border: none;
+}
+
+.steps {
+    list-style: none;
+    counter-reset: step;
+}
+
+.steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    color: #c0c8c2;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 13px;
+}
+
+.steps li::before {
+    content: counter(step);
+    background: #183c29;
+    color: #29e38a;
+    min-width: 25px;
+    height: 25px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.note {
+    font-size: 11px;
+    color: #858e88;
+    line-height: 1.8;
+    text-align: center;
+    padding: 15px 5px;
+}
+
+.contact a {
+    display: block;
+    color: #20d982;
+    text-decoration: none;
+    padding: 11px 0;
+    font-size: 14px;
+}
+
+footer {
+    text-align: center;
+    color: #626d66;
+    font-size: 11px;
+    padding: 20px 0;
+}
+
+/* POPUP QRIS */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,0.94);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+.modal-content img {
+    width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    background: white;
+    border-radius: 12px;
+    padding: 8px;
+}
+
+.close {
+    position: absolute;
+    top: -45px;
+    right: 0;
+    background: #202822;
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+button:focus-visible, a:focus-visible {
+    outline: 2px solid #20d982;
+    outline-offset: 4px;
+}
+
+@media(max-width:350px) {
+    .hero h1 {
+        font-size: 29px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- JUDUL -->
+    <header class="hero">
+        <h1>
+            Dukung<br>
+            <span class="green">DitzzSolo Code.</span>
+        </h1>
+
+        <p class="description">
+            DitzzSolo Code adalah sebuah Tim yang berisi oleh
+            4 orang siswa SMP hingga SMA/K. Diwebsite ini,
+            anda dapat berdonasi untuk kebutuhan Tim Kami.
+            Nominal bebas dan sepenuhnya suka rela.
+        </p>
+    </header>
+
+    <!-- QRIS -->
+    <section class="card qris-box">
+
+        <img src="qris.jpg" alt="QRIS DitzzSolo Code" class="qris">
+
+        <div class="merchant">DitzzSolo Code</div>
+
+        <p class="merchant-info">
+            Nama ini adalah nama yang muncul di aplikasi E-Walletmu.
+        </p>
+
+        <button class="fullscreen" onclick="openQRIS()">
+            Tampilkan layar penuh
+        </button>
+
+    </section>
+
+    <!-- PILIHAN NOMINAL -->
+    <section class="card">
+
+        <h2 class="section-title">Pilihan Nominal Dukungan</h2>
+
+        <div class="amounts">
+
+            <div class="amount">
+                <strong>Rp. 5.000</strong>
+                <span>Segelas Kopi</span>
+            </div>
+
+            <div class="amount">
+                <strong>Rp. 10.000</strong>
+                <span>Kopi & Camilan</span>
+            </div>
+
+            <div class="amount">
+                <strong>Rp. 20.000</strong>
+                <span>Makan Siang</span>
+            </div>
+
+            <div class="amount">
+                <strong>Rp. 50.000</strong>
+                <span>Sponsor untuk bulan ini</span>
+            </div>
+
+        </div>
+
+        <p class="merchant-info" style="margin-top:15px;">
+            Kamu bebas menentukan nominal dukungan melalui aplikasi E-Wallet.
+        </p>
+
+    </section>
+
+    <!-- YANG KAMU DUKUNG -->
+    <section class="card">
+
+        <h2 class="section-title">Yang Kamu Dukung</h2>
+
+        <ul class="support-list">
+            <li>🌐 Internet untuk pembuatan Kode</li>
+            <li>💻 Update Selanjutnya</li>
+        </ul>
+
+    </section>
+
+    <!-- CARA BAYAR -->
+    <section class="card">
+
+        <h2 class="section-title">Cara Bayar</h2>
+
+        <ol class="steps">
+            <li>Buka aplikasi E-Wallet atau Mobile Banking yang mendukung QRIS.</li>
+            <li>Pilih menu Scan QRIS atau Bayar dengan QRIS.</li>
+            <li>Arahkan kamera ke gambar QRIS DitzzSolo Code di atas.</li>
+            <li>Masukkan nominal dukungan sesuai keinginanmu.</li>
+            <li>Pastikan nama merchant yang muncul adalah DitzzSolo Code.</li>
+            <li>Periksa kembali nominal dan detail pembayaran sebelum konfirmasi.</li>
+            <li>Simpan bukti pembayaran jika diperlukan.</li>
+        </ol>
+
+    </section>
+
+    <!-- CATATAN -->
+    <p class="note">
+        Dukungan ini bersifat sukarela dan tidak membuka fitur tambahan
+        pada websitemu. Pembayaran yang sudah berhasil tidak dapat
+        dibatalkan atau direfund dari laman ini.
+    </p>
+
+    <!-- HUBUNGI KAMI -->
+    <section class="card contact">
+
+        <h2 class="section-title">Hubungi Kami</h2>
+
+        <a href="https://wa.me/6285702834462" target="_blank">
+            WhatsApp ↗
+        </a>
+
+        <a href="https://www.tiktok.com/@xyz_dzx" target="_blank">
+            TikTok ↗
+        </a>
+
+    </section>
+
+    <footer>
+        © 2026 DitzzSolo Code. All Rights Reserved.
+    </footer>
+
+</div>
+
+<!-- POPUP QRIS -->
+<div class="modal" id="qrisModal" onclick="closeQRIS(event)">
+
+    <div class="modal-content">
+
+        <button class="close" onclick="closeQRIS()">
+            &times;
+        </button>
+
+        <img src="qris.jpg" alt="QRIS DitzzSolo Code layar penuh">
+
+    </div>
+
+</div>
+
+<script>
+
+function openQRIS() {
+    document.getElementById("qrisModal").classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+function closeQRIS(event) {
+    if (
+        !event ||
+        event.target.id === "qrisModal" ||
+        event.target.classList.contains("close")
+    ) {
+        document.getElementById("qrisModal").classList.remove("active");
+        document.body.style.overflow = "auto";
+    }
+}
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeQRIS();
+    }
+});
+
+</script>
+
+</body>
+  </html>
