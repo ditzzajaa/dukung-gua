@@ -202,6 +202,33 @@ body.dark .theme-switch::before {
     animation: fadeUp 1.1s ease both;
 }
 
+/* TYPEWRITER */
+
+.typing-text,
+.typing-subtitle {
+    display: inline-block;
+    min-height: 1.2em;
+    white-space: nowrap;
+}
+
+.typing-text::after,
+.typing-subtitle::after {
+    content: "|";
+    display: inline-block;
+    margin-left: 4px;
+    color: var(--green);
+    animation: cursorBlink .7s infinite;
+}
+
+@keyframes cursorBlink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
 .hero-description {
     color: var(--muted);
     max-width: 570px;
@@ -496,6 +523,11 @@ footer strong {
         letter-spacing: -1.5px;
     }
 
+    .typing-text,
+    .typing-subtitle {
+        white-space: normal;
+    }
+
     section {
         padding: 65px 6%;
     }
@@ -564,15 +596,21 @@ footer strong {
         <div class="hero-label">✦ PERSONAL DEVELOPER PORTFOLIO</div>
 
         <h1>
-            <span class="gradient-text">Selamat Datang</span>
+            <span class="gradient-text typing-text" id="heroTitle">
+                Selamat Datang
+            </span>
         </h1>
 
-        <h2>di Website Kami</h2>
+        <h2>
+            <span class="typing-subtitle" id="heroSubtitle">
+                di Website Kami
+            </span>
+        </h2>
 
         <p class="hero-description">
             Mengenal lebih dekat DitzzSolo Code, perjalanan,
             pengalaman, serta karya saya dalam dunia teknologi
-                dan pengembangan website.
+            dan pengembangan website.
         </p>
 
         <a href="https://project-gua.vercel.app"
@@ -876,6 +914,92 @@ if ("IntersectionObserver" in window) {
     });
 
 }
+
+// ==============================
+// TYPEWRITER ANIMATION
+// ==============================
+
+const titleElement = document.getElementById("heroTitle");
+const subtitleElement = document.getElementById("heroSubtitle");
+
+const textPairs = [
+    {
+        title: "Selamat Datang",
+        subtitle: "di Website Kami"
+    },
+    {
+        title: "DitzzSolo Code",
+        subtitle: "Official Website"
+    }
+];
+
+let pairIndex = 0;
+let titleIndex = 0;
+let subtitleIndex = 0;
+let deleting = false;
+
+function typeWriter() {
+
+    const current = textPairs[pairIndex];
+
+    if (!deleting) {
+
+        // MENGETIK
+        titleElement.textContent =
+            current.title.substring(0, titleIndex + 1);
+
+        subtitleElement.textContent =
+            current.subtitle.substring(0, subtitleIndex + 1);
+
+        titleIndex++;
+        subtitleIndex++;
+
+        if (
+            titleIndex >= current.title.length &&
+            subtitleIndex >= current.subtitle.length
+        ) {
+
+            deleting = true;
+
+            // Tahan teks selama 3 detik
+            setTimeout(typeWriter, 3000);
+            return;
+        }
+
+        setTimeout(typeWriter, 100);
+
+    } else {
+
+        // MENGHAPUS
+        titleElement.textContent =
+            current.title.substring(0, titleIndex - 1);
+
+        subtitleElement.textContent =
+            current.subtitle.substring(0, subtitleIndex - 1);
+
+        titleIndex--;
+        subtitleIndex--;
+
+        if (titleIndex <= 0 && subtitleIndex <= 0) {
+
+            deleting = false;
+
+            pairIndex = (pairIndex + 1) % textPairs.length;
+
+            setTimeout(typeWriter, 350);
+            return;
+        }
+
+        setTimeout(typeWriter, 45);
+    }
+}
+
+// MULAI ANIMASI
+
+titleElement.textContent = "";
+subtitleElement.textContent = "";
+
+typeWriter();
 
 </script>
 
